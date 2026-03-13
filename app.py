@@ -47,6 +47,9 @@ def home():
 def predict():
     uniprot_id = request.form.get('uniprot_id', '').strip()
     sequence = request.form.get('sequence', '').strip()
+    
+    if len(sequence) > 400:
+    return render_template('index.html', error="sequence must be under 400 amino acids")
 
     if uniprot_id:
         sequence, error = get_sequence_from_uniprot(uniprot_id)
