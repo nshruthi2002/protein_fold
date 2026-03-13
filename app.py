@@ -43,8 +43,10 @@ def get_sequence_properties(sequence):
 def home():
     return render_template('index.html')
 
-@app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['POST', 'GET'], strict_slashes=False)
 def predict():
+    if request.method == 'GET':
+        return render_template('index.html')
     uniprot_id = request.form.get('uniprot_id', '').strip()
     sequence = request.form.get('sequence', '').strip()
     
